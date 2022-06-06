@@ -26,6 +26,8 @@ def angleInRange(angle, a1, a2):
     if (angle > a1 and angle < a2):
         return (angle-a1)/range
     elif (angle-2*math.pi > a1 and angle-2*math.pi < a2) :
+        return (angle-2*math.pi-a1)/range
+    elif (angle+2*math.pi > a1 and angle+2*math.pi < a2) :
         return (angle-a1)/range
     else:
         return False
