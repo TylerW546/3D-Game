@@ -18,7 +18,7 @@ class Camera():
     def draw(self, screen, points):
         for point in points:
             screen_x = None
-            screen_y = 250
+            screen_y = None
             
             relative_point = point.getDuplicate()
             relative_point.subtract(self.position)
@@ -26,10 +26,15 @@ class Camera():
             yaw_angle = angleFromPoints(0, 0, relative_point.x, relative_point.y)
             if angleInRange(yaw_angle-self.yaw+2*math.pi,-math.pi/6, math.pi/6):
                 screen_x = 500*angleInRange(yaw_angle-self.yaw+2*math.pi, -math.pi/6, math.pi/6)
-            
-            if screen_x and screen_y:
-                pygame.draw.circle(screen, (200,0,0), (screen_x, screen_y), 2)
 
+            pitch_angle = angleFromPoints(0, 0, Vector3(relative_point.x, relative_point.y, 0).getMagnitude(), relative_point.z)
+            if angleInRange(pitch_angle-self.pitch+2*math.pi,-math.pi/6, math.pi/6):
+                screen_y = 500*angleInRange(pitch_angle-self.pitch+2*math.pi, -math.pi/6, math.pi/6)
+            
+            radius = 400/Vector3(relative_point.x, relative_point.y, 0).getMagnitude()
+
+            if screen_x and screen_y:
+                pygame.draw.circle(screen, (200,0,0), (screen_x, screen_y), radius)
 
     def draw2D(self, screen, points):
         pygame.draw.circle(screen, (0,200,0), (self.position.x, self.position.y), 4)
