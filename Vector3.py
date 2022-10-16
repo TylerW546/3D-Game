@@ -12,6 +12,9 @@ class Vector3():
     def getMagnitude(self):
         return math.dist((0,0,0), (self.x, self.y, self.z))
 
+    def setMagnitude(self, mag):
+        self.scalarMultiply(mag/self.getMagnitude())
+    
     def scalarMultiply(self, mult):
         self.x*=mult
         self.y*=mult
